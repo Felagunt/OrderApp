@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.orderapp.order_feature.domain.model.BoughtProduct
 import com.example.orderapp.order_feature.domain.model.Order
+import com.example.orderapp.order_feature.domain.repository.OrderRepository
 import com.example.orderapp.order_feature.presentation.mapper.toOrderDetailListItem
 import com.example.orderapp.order_feature.presentation.mapper.toOrderListItem
 import com.example.orderapp.order_feature.presentation.state.OrderDetailListItem
@@ -19,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-
-): ViewModel() {
+    private val orderRepository: OrderRepository
+) : ViewModel() {
 
     private lateinit var orders: List<Order>
 
@@ -35,8 +37,27 @@ class OrderViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            //orders
+            orders = orderRepository.getOrders()
             setupOrderList()
+            /*
+
+            */
+            orderRepository.insertOrder(
+                Order(
+                    "1",
+                    "2023.01.03 11:15:33",
+                    delivererTime = "Evening",
+                    delivererName = "Velaes",
+                    listOf(
+                        BoughtProduct(
+                            "1",
+                            "Sneakers",
+                            10.99f,
+                            4
+                        )
+                    )
+                )
+            )
         }
     }
 
@@ -46,7 +67,7 @@ class OrderViewModel @Inject constructor(
     }
 
     private fun initOrderForDialog(orderId: String) {
-        clickedOrderItem = orders.firstOrNull {it.orderId == orderId}?.toOrderDetailListItem()
+        clickedOrderItem = orders.firstOrNull { it.orderId == orderId }?.toOrderDetailListItem()
     }
 
     fun onDismissOrderDialog() {
