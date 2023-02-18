@@ -33,7 +33,7 @@ fun OrderScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    //TODO
                 },
                 backgroundColor = MaterialTheme.colors.background
             ) {
@@ -92,5 +92,9 @@ fun OrderScreen(
 
             }
         }
+    }
+
+    if(orderViewModel.isOrderDialogShown && orderViewModel.clickedOrderItem != null) {
+
     }
 }

@@ -41,7 +41,7 @@ class OrderViewModel @Inject constructor(
             setupOrderList()
             /*
 
-            */
+
             orderRepository.insertOrder(
                 Order(
                     "1",
@@ -58,6 +58,8 @@ class OrderViewModel @Inject constructor(
                     )
                 )
             )
+
+             */
         }
     }
 
