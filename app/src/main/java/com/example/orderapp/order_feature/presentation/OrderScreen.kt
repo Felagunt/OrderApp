@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.orderapp.core.presentation.ScreenRoutes
 import com.example.orderapp.order_feature.presentation.components.OrderDetailDialog
 import com.example.orderapp.order_feature.presentation.components.OrderUiListItem
 import com.example.orderapp.ui.theme.white
@@ -34,7 +35,9 @@ fun OrderScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    //TODO
+                    navController.navigate(
+                        ScreenRoutes.OrderChooseDelivererScreen.route
+                    )
                 },
                 backgroundColor = MaterialTheme.colors.background
             ) {
