@@ -134,7 +134,7 @@ class OrderChooseProductsViewModel @Inject constructor(
         isCheckoutDialogShown = true
     }
 
-    fun onDismissDialog() {
+    fun onDismissCheckoutDialog() {
         isCheckoutDialogShown = false
     }
 

@@ -18,6 +18,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.orderapp.core.presentation.ScreenRoutes
+import com.example.orderapp.order_feature.presentation.components.CheckoutDialog
 import com.example.orderapp.order_feature.presentation.components.ProductUiListItem
 import com.example.orderapp.ui.theme.gray
 import com.example.orderapp.ui.theme.orange
@@ -122,5 +124,19 @@ fun OrderChooseProductsScreen(
                 }
             }
         }
+    }
+    if (orderChooseProductsViewModel.isCheckoutDialogShown) {
+        CheckoutDialog(
+            onDismiss = {
+                        orderChooseProductsViewModel.onDismissCheckoutDialog()
+            },
+            onConfirm = {
+                        orderChooseProductsViewModel.onBuy()
+                navController.navigate(ScreenRoutes.OrderScreen.route) {
+                    popUpTo(0)
+                }
+            },
+            selectedProducts = orderChooseProductsViewModel.selectedProducts
+        )
     }
 }
