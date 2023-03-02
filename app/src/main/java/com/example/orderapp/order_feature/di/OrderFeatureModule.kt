@@ -5,6 +5,7 @@ import com.example.orderapp.core.data.local.OrderDao
 import com.example.orderapp.core.data.local.ProductDao
 import com.example.orderapp.order_feature.data.repository.OrderRepositoryImpl
 import com.example.orderapp.order_feature.domain.repository.OrderRepository
+import com.example.orderapp.order_feature.domain.use_case.ConfirmOrderUseCase
 import com.example.orderapp.order_feature.domain.use_case.FilterListByNameUseCase
 import com.example.orderapp.order_feature.domain.use_case.SortListByNameUseCase
 import dagger.Module
@@ -37,5 +38,11 @@ object OrderFeatureModule {
     @Singleton
     fun provideSortListByNameUseCase(): SortListByNameUseCase {
         return SortListByNameUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideConfirmOrderUseCase(orderRepository: OrderRepository): ConfirmOrderUseCase {
+        return ConfirmOrderUseCase(orderRepository)
     }
 }
